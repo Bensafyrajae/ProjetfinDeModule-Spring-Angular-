@@ -5,28 +5,25 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import java.time.LocalDateTime;
-import java.util.List;
 
+import java.time.LocalDateTime;
+
+@Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-public class SessionExamen {
+public class ExamenClasse {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private LocalDateTime debut;
-
-    private LocalDateTime fin;
-
-    private int scoreTotal;
-
-    @ManyToOne
-    private Etudiant etudiant;
+    private LocalDateTime dateDebut;
+    private LocalDateTime dateFin;
 
     @ManyToOne
     private Examen examen;
+
+    @ManyToOne
+    private Classe classe;
 }

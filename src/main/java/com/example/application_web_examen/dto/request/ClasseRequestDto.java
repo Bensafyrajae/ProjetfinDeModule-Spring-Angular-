@@ -5,11 +5,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ParticipationRequestDto {
-    private Long etudiantId;
-    private Long examenId;
+public class ClasseRequestDto {
+    private String nom;
+    private Integer anneeAcademique;
+    private List<Long> moduleIds;
 }

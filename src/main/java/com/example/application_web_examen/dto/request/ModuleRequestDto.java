@@ -5,14 +5,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ExamenRequestDto {
+public class ModuleRequestDto {
     private String nom;
+    private String code;
     private String description;
-    private List<QuestionRequestDto> questions;
 }

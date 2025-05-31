@@ -11,7 +11,7 @@ import com.example.application_web_examen.enums.Role;
 import com.example.application_web_examen.exception.UserNotFoundException;
 import com.example.application_web_examen.mapper.UserMapper;
 import com.example.application_web_examen.model.Admin;
-import com.example.application_web_examen.model.prof;
+import com.example.application_web_examen.model.Prof;
 import com.example.application_web_examen.model.Etudiant;
 import com.example.application_web_examen.model.User;
 import com.example.application_web_examen.service.AuthenticationService;
@@ -41,17 +41,19 @@ public class AuthenticationController {
     }
 
 
-    @PostMapping("/signup")
-    public ResponseEntity<EtudiantResponseDto> register(@RequestBody EtudiantRequestDto customerDTO) {
-        User registeredUser = authenticationService.signup(customerDTO);
-        EtudiantResponseDto responseDto = userMapper.toCustomerResponseDto((Etudiant) registeredUser); // Assuming registeredUser is of type Customer
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PostMapping("/add-etudiant")
+    public ResponseEntity<EtudiantResponseDto> register(@RequestBody EtudiantRequestDto etudiantDTO) {
+        User newEtudiant = authenticationService.signup(etudiantDTO);
+        EtudiantResponseDto responseDto = userMapper.toEtudiantResponseDto((Etudiant) newEtudiant);
         return ResponseEntity.ok(responseDto);
     }
 
-    @PostMapping("/add-artisan")
-    public ResponseEntity<ProfResponseDto> addArtisan(@RequestBody ProfRequestDto artisanDTO) {
-        User newArtisan = authenticationService.addArtisan(artisanDTO);
-        ProfResponseDto responseDto = userMapper.toArtisanResponseDto((prof) newArtisan); // Assuming newArtisan is of type Artisan
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PostMapping("/add-prof")
+    public ResponseEntity<ProfResponseDto> addArtisan(@RequestBody ProfRequestDto profDTO) {
+        User newProf = authenticationService.addProf(profDTO);
+        ProfResponseDto responseDto = userMapper.toProfResponseDto((Prof) newProf);
         return ResponseEntity.ok(responseDto);
     }
 

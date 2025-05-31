@@ -6,31 +6,21 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
-import java.util.List;
-
+@Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-public class Participation {
+public class ModuleProfesseur {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private LocalDateTime debut;
-
-    private LocalDateTime fin;
-
-    private int scoreTotal;
+    private Integer anneeAcademique;
 
     @ManyToOne
-    private Etudiant etudiant;
+    private Module module;
 
     @ManyToOne
-    private Examen examen;
-
-    @OneToMany(mappedBy = "participation", cascade = CascadeType.ALL)
-    private List<Reponse> reponses;
+    private Prof professeur;
 }

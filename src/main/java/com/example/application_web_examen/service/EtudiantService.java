@@ -24,21 +24,21 @@ public class EtudiantService {
     @Autowired
     private UserMapper userMapper;
 
-    public List<Etudiant> getAllCustomers() {
+    public List<Etudiant> getAllEtudiants() {
         return etudiantRepository.findAll();
     }
 
-    public Etudiant getCustomerById(Long id) {
+    public Etudiant getEtudiantById(Long id) {
         return etudiantRepository.findById(id).orElse(null);
     }
 
-    public void deleteCustomer(Long id) {
+    public void deleteEtudiant(Long id) {
         etudiantRepository.deleteById(id);
     }
 
     @Transactional
-    public Etudiant updateCustomer(EtudiantRequestDto customerDTO, Etudiant etudiant, MultipartFile userPhoto) {
-        Etudiant updatedEtudiant = userMapper.partialUpdateCustomer(customerDTO, etudiant);
+    public Etudiant updateEtudiant(EtudiantRequestDto etudiantDTO, Etudiant etudiant, MultipartFile userPhoto) {
+        Etudiant updatedEtudiant = userMapper.partialUpdateEtudiant(etudiantDTO, etudiant);
 
         if (userPhoto != null && !userPhoto.isEmpty()) {
             Media media=  mediaService.updateMediaForUser(userPhoto, updatedEtudiant);

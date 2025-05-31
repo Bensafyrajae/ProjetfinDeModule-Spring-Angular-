@@ -7,15 +7,24 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.ArrayList;
+import java.util.List;
 @Getter
 @Setter
 @AllArgsConstructor
 @Entity
-public class prof extends User {
+public class Prof extends User {
 
-    public prof() {
+    public Prof() {
         this.setRole(Role.PROF);
     }
+
+    @OneToMany(mappedBy = "createur")
+    private List<Examen> examens = new ArrayList<>();
+
+    @OneToMany(mappedBy = "professeur")
+    private List<ModuleProfesseur> moduleProfesseurs = new ArrayList<>();
 
     @Enumerated(EnumType.STRING)
     private Specialty specialty;

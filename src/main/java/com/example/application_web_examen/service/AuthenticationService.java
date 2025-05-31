@@ -6,7 +6,7 @@ import com.example.application_web_examen.dto.request.ProfRequestDto;
 import com.example.application_web_examen.dto.request.EtudiantRequestDto;
 import com.example.application_web_examen.mapper.UserMapper;
 import com.example.application_web_examen.model.Admin;
-import com.example.application_web_examen.model.prof;
+import com.example.application_web_examen.model.Prof;
 import com.example.application_web_examen.model.User;
 import com.example.application_web_examen.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,12 +39,12 @@ public class AuthenticationService {
             throw new RuntimeException("Email already exists");
         }
 
-        User user = userMapper.toCustomerEntity(input);
+        User user = userMapper.toEtudiantEntity(input);
         user.setPassword(passwordEncoder.encode(input.getPassword()));
         return userRepository.save(user);
     }
 
-    public prof addArtisan(ProfRequestDto input) {
+    public Prof addProf(ProfRequestDto input) {
         if (userRepository.findByUsername(input.getUsername()).isPresent()) {
             throw new RuntimeException("Username already exists");
         }
@@ -52,7 +52,7 @@ public class AuthenticationService {
             throw new RuntimeException("Email already exists");
         }
 
-        prof prof = userMapper.toArtisanEntity(input);
+        Prof prof = userMapper.toProfEntity(input);
         prof.setPassword(passwordEncoder.encode(input.getPassword()));
         return userRepository.save(prof);
     }

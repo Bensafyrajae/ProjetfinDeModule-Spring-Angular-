@@ -6,29 +6,30 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
+@Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
 public class Reponse {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String reponseDonnee;
-
-    private boolean correcte;
-
-    @ManyToOne
-    private Etudiant etudiant;
+    private String reponseTexte;
+    private Boolean estCorrect;
+    private LocalDateTime dateReponse;
 
     @ManyToOne
     private Question question;
 
     @ManyToOne
-    private Examen examen;
+    private Etudiant etudiant;
 
-    @ManyToOne
-    private Participation participation;
+    @PrePersist
+    public void prePersist() {
+        this.dateReponse = LocalDateTime.now();
+    }
 }

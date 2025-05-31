@@ -2,7 +2,7 @@ package com.example.application_web_examen.service;
 
 import com.example.application_web_examen.dto.request.ProfRequestDto;
 import com.example.application_web_examen.mapper.UserMapper;
-import com.example.application_web_examen.model.prof;
+import com.example.application_web_examen.model.Prof;
 import com.example.application_web_examen.model.Media;
 import com.example.application_web_examen.repository.ProfRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,20 +25,20 @@ public class ProfService {
         this.userMapper = userMapper;
     }
 
-    public List<prof> getAllArtisans() {
+    public List<Prof> getAllProfs() {
         return profRepository.findAll();
     }
 
-    public prof getArtisanById(Long id) {
+    public Prof getProfById(Long id) {
         return profRepository.findById(id).orElse(null);
     }
 
-    public void deleteArtisan(Long id) {
+    public void deleteProf(Long id) {
         profRepository.deleteById(id);
     }
 
-    public prof updateArtisan(ProfRequestDto artisanDTO, prof prof, MultipartFile userPhoto) {
-        prof newProf = userMapper.partialUpdateArtisan(artisanDTO, prof);
+    public Prof updateProf(ProfRequestDto profDTO, Prof prof, MultipartFile userPhoto) {
+        Prof newProf = userMapper.partialUpdateProf(profDTO, prof);
 
         if (userPhoto != null && !userPhoto.isEmpty()) {
             Media media=  mediaService.updateMediaForUser(userPhoto, newProf);

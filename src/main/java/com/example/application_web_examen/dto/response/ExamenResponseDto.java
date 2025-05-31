@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
@@ -16,5 +17,7 @@ public class ExamenResponseDto {
     private String nom;
     private String description;
     private String lienUnique;
+    private LocalDateTime dateCreation;
+    private ProfResponseDto createur;
     private List<QuestionResponseDto> questions;
 }

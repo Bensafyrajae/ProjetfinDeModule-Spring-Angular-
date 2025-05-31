@@ -1,10 +1,11 @@
 package com.example.application_web_examen.dto.request;
 
-import com.example.application_web_examen.enums.QuestionType;
+import com.example.application_web_examen.enums.TypeQuestion;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -14,9 +15,9 @@ import java.util.List;
 @AllArgsConstructor
 public class QuestionRequestDto {
     private String texteQuestion;
-    private int dureeEnSecondes;
-    private QuestionType type;
-    private List<String> choix; // uniquement pour QCM
+    private Integer dureeEnSecondes;
+    private TypeQuestion type;
+    private List<String> options;
     private String bonneReponse;
-    private String mediaUrl; // URL de l'image
+    private MultipartFile image;
 }

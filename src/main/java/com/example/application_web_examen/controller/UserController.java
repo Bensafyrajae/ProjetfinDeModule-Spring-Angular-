@@ -2,7 +2,7 @@ package com.example.application_web_examen.controller;
 
 import com.example.application_web_examen.mapper.UserMapper;
 import com.example.application_web_examen.model.Admin;
-import com.example.application_web_examen.model.prof;
+import com.example.application_web_examen.model.Prof;
 import com.example.application_web_examen.model.Etudiant;
 import com.example.application_web_examen.model.User;
 import com.example.application_web_examen.service.UserService;
@@ -41,10 +41,10 @@ public class UserController {
                 .map(user -> {
                     if (user instanceof Admin) {
                         return userMapper.toAdminResponseDto((Admin) user);
-                    } else if (user instanceof prof) {
-                        return userMapper.toArtisanResponseDto((prof) user);
+                    } else if (user instanceof Prof) {
+                        return userMapper.toProfResponseDto((Prof) user);
                     } else if (user instanceof Etudiant) {
-                        return userMapper.toCustomerResponseDto((Etudiant) user);
+                        return userMapper.toEtudiantResponseDto((Etudiant) user);
                     } else {
                         return null;
                     }
@@ -69,10 +69,10 @@ public class UserController {
 
         if (user instanceof Admin) {
             return new ResponseEntity<>(userMapper.toAdminResponseDto((Admin) user), HttpStatus.OK);
-        } else if (user instanceof prof) {
-            return new ResponseEntity<>(userMapper.toArtisanResponseDto((prof) user), HttpStatus.OK);
+        } else if (user instanceof Prof) {
+            return new ResponseEntity<>(userMapper.toProfResponseDto((Prof) user), HttpStatus.OK);
         } else if (user instanceof Etudiant) {
-            return new ResponseEntity<>(userMapper.toCustomerResponseDto((Etudiant) user), HttpStatus.OK);
+            return new ResponseEntity<>(userMapper.toEtudiantResponseDto((Etudiant) user), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }

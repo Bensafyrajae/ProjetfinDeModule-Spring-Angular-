@@ -20,16 +20,16 @@ public interface UserMapper {
     Admin partialUpdateAdmin(AdminRequestDto adminRequestDto, @MappingTarget Admin admin);
 
     // Artisan Mappings
-    ProfResponseDto toArtisanResponseDto(prof prof);
-    prof toArtisanEntity(ProfRequestDto dto);
+    ProfResponseDto toProfResponseDto(Prof prof);
+    Prof toProfEntity(ProfRequestDto dto);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    prof partialUpdateArtisan(ProfRequestDto profRequestDto, @MappingTarget prof prof);
+    Prof partialUpdateProf(ProfRequestDto profRequestDto, @MappingTarget Prof prof);
 
     // Customer Mappings
-    EtudiantResponseDto toCustomerResponseDto(Etudiant etudiant);
-    Etudiant toCustomerEntity(EtudiantRequestDto dto);
+    EtudiantResponseDto toEtudiantResponseDto(Etudiant etudiant);
+    Etudiant toEtudiantEntity(EtudiantRequestDto dto);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    Etudiant partialUpdateCustomer(EtudiantRequestDto etudiantRequestDto, @MappingTarget Etudiant etudiant);
+    Etudiant partialUpdateEtudiant(EtudiantRequestDto etudiantRequestDto, @MappingTarget Etudiant etudiant);
 }

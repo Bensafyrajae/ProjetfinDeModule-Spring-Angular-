@@ -11,8 +11,9 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ParticipationResponseDto {
+public class ClasseResponseDto {
     private Long id;
-    private int scoreObtenu;
-    private List<ReponseResponseDto> reponses;
+    private String nom;
+    private Integer anneeAcademique;
+    private List<ModuleResponseDto> modules;
 }

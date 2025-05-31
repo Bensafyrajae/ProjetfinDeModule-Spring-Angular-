@@ -3,7 +3,7 @@ package com.example.application_web_examen.controller;
 import com.example.application_web_examen.dto.request.ProfRequestDto;
 import com.example.application_web_examen.dto.response.ProfResponseDto;
 import com.example.application_web_examen.mapper.UserMapper;
-import com.example.application_web_examen.model.prof;
+import com.example.application_web_examen.model.Prof;
 import com.example.application_web_examen.service.ProfService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,10 +18,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * Controller for managing artisans.
+ * Controller for managing profs.
  */
 @RestController
-@RequestMapping("/api/artisans")
+@RequestMapping("/api/profs")
 public class ProfController {
 
     private final ProfService profService;
@@ -34,50 +34,50 @@ public class ProfController {
     }
 
     /**
-     * Retrieve all artisans.
+     * Retrieve all profs.
      *
-     * @return List of all artisans.
+     * @return List of all profs.
      */
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/all")
-    public ResponseEntity<List<ProfResponseDto>> getAllArtisans() {
-        List<prof> profs = profService.getAllArtisans();
-        List<ProfResponseDto> profResponseDtos = profs.stream()
-                .map(userMapper::toArtisanResponseDto)
+    public ResponseEntity<List<ProfResponseDto>> getAllProfs() {
+        List<Prof> Profs = profService.getAllProfs();
+        List<ProfResponseDto> profResponseDtos = Profs.stream()
+                .map(userMapper::toProfResponseDto)
                 .collect(Collectors.toList());
         return new ResponseEntity<>(profResponseDtos, HttpStatus.OK);
     }
 
     /**
-     * Retrieve an artisan by ID.
+     * Retrieve an prof by ID.
      *
-     * @return The artisan with the specified ID.
+     * @return The prof with the specified ID.
      */
-    @PreAuthorize("hasAnyRole('ADMIN', 'ARTISAN')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'PROF')")
     @GetMapping("/details")
-    public ResponseEntity<ProfResponseDto> getArtisanById(@AuthenticationPrincipal prof currentProf) {
-        prof prof = profService.getArtisanById(currentProf.getId());
+    public ResponseEntity<ProfResponseDto> getArtisanById(@AuthenticationPrincipal Prof currentProf) {
+        Prof prof = profService.getProfById(currentProf.getId());
         return prof != null
-                ? new ResponseEntity<>(userMapper.toArtisanResponseDto(prof), HttpStatus.OK)
+                ? new ResponseEntity<>(userMapper.toProfResponseDto(prof), HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     /**
-     * Update an existing artisan.
+     * Update an existing prof.
      *
-     * @param artisanDTO The artisan with updated information.
+     * @param artisanDTO The prof with updated information.
      * @param userPhoto  The photo to be updated, if any.
-     * @param prof    The authenticated artisan.
-     * @return The updated artisan.
+     * @param prof    The authenticated prof.
+     * @return The updated prof.
      */
-    @PreAuthorize("hasAnyRole('ADMIN', 'ARTISAN')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'PROF')")
     @PutMapping(value = "/update", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<ProfResponseDto> updateArtisan(
-            @RequestPart("artisan") ProfRequestDto artisanDTO,
+            @RequestPart("prof") ProfRequestDto artisanDTO,
             @RequestPart(value = "userPhoto", required = false) MultipartFile userPhoto,
-            @AuthenticationPrincipal prof prof) {
+            @AuthenticationPrincipal Prof prof) {
 
-        prof updatedProf = profService.updateArtisan(artisanDTO, prof, userPhoto);
-        return new ResponseEntity<>(userMapper.toArtisanResponseDto(updatedProf), HttpStatus.OK);
+        Prof updatedProf = profService.updateProf(artisanDTO, prof, userPhoto);
+        return new ResponseEntity<>(userMapper.toProfResponseDto(updatedProf), HttpStatus.OK);
     }
 }
